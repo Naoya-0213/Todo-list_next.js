@@ -8,8 +8,8 @@ import Link from "next/link";
 import type { Session } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import { useEffect } from "react";
-import type { Database } from "../lib/database.types";
-import useStore from "../../../store";
+import useStore from "../../../../store";
+import type { Database } from "@/app/lib/database.types";
 
 type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
