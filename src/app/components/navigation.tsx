@@ -4,11 +4,12 @@
 "use client";
 
 import Link from "next/link";
-import useStore from "../../../../store";
+// import useStore from "../../../../store";
 import type { Session } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import { useEffect } from "react";
-import type { Database } from "@/lib/database.types";
+import type { Database } from "../lib/database.types";
+import useStore from "../../../store";
 
 type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
