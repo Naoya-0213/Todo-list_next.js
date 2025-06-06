@@ -1,9 +1,9 @@
+import { createClient } from "../../utils/supabase/server";
 import type { Database } from "./lib/database.types";
-import { createClient } from "../../utils/supabase/clients";
 
 // メインページ
 export default async function Home() {
-  const supabase = createClient<Database>();
+  const supabase = await createClient<Database>();
 
   // セッションに取得
   const {
