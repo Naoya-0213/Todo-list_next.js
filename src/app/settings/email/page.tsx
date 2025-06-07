@@ -16,7 +16,7 @@ const EmailPage = async () => {
 
   // 未認証の場合、リダイレクト
   if (!session) {
-    redirect("/auth/login");
+    redirect("/auth/signin");
   }
 
   return <Email email={session.user.email!} />;

@@ -42,7 +42,7 @@ const Email = ({ email }: { email: string }) => {
       // メールアドレス変更メールを送信
       const { error: updateUserError } = await supabase.auth.updateUser(
         { email: data.email },
-        { emailRedirectTo: `${location.origin}/auth/login` }
+        { emailRedirectTo: `${location.origin}/auth/signin` }
       );
 
       // エラーチェック
