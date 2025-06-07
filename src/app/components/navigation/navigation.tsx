@@ -43,22 +43,7 @@ export const Navigation = ({
 
         <div className="text-sm font-bold">
           {session ? (
-            <div className="flex items-center space-x-5">
-              <Link href="/settings/profile">
-                <div className="relative w-10 h-10">
-                  <Image
-                    src={
-                      profile && profile.avatar_url
-                        ? profile.avatar_url
-                        : "/default.png"
-                    }
-                    className="rounded-full object-cover"
-                    alt="avatar"
-                    fill
-                  />
-                </div>
-              </Link>
-            </div>
+            <div className="flex items-center space-x-5"></div>
           ) : (
             <div className="flex items-center space-x-5">
               <Link href="/auth/signin">ログイン</Link>
