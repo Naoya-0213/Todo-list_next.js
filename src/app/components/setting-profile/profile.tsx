@@ -152,14 +152,14 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="pt-[10px]">
       <div className="text-center font-bold text-xl mb-10">プロフィール</div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex justify-center items-center flex-col"
       >
         {/* アバター画像 */}
-        <div className="mb-5">
+        <div className="mb-3">
           <div className="flex flex-col text-sm items-center justify-center mb-5">
             <div className="relative w-24 h-24 mb-5">
               <Image
@@ -195,7 +195,7 @@ const Profile = () => {
         </div>
 
         {/* 名前 */}
-        <div className="mb-5 w-2/3">
+        <div className="mb-3 w-2/3">
           <div className="text-sm mb-1 font-bold">名前</div>
           <input
             type="text"
@@ -211,7 +211,7 @@ const Profile = () => {
         </div>
 
         {/* 自己紹介 */}
-        <div className="mb-5  w-2/3">
+        <div className="mb-3  w-2/3">
           <div className="text-sm mb-1 font-bold">自己紹介</div>
           <textarea
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500"
