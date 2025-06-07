@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,6 +10,7 @@ import * as z from "zod";
 import LoadingSpinner from "../loading/loading";
 import type { Database } from "@/app/lib/database.types";
 import useStore from "../../../../store";
+import { createClient } from "../../../../utils/supabase/clients";
 
 type Schema = z.infer<typeof schema>;
 
@@ -23,7 +23,7 @@ const schema = z.object({
 // プロフィール
 const Profile = () => {
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
+  const supabase = createClient<Database>();
   const [loading, setLoading] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [message, setMessage] = useState("");

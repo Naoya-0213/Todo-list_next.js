@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import LoadingSpinner from "../loading/loading";
 import type { Database } from "@/app/lib/database.types";
+import { createClient } from "../../../../utils/supabase/clients";
 type Schema = z.infer<typeof schema>;
 
 // 入力データの検証ルールを定義
@@ -18,7 +18,7 @@ const schema = z.object({
 // メールアドレス変更
 const Email = ({ email }: { email: string }) => {
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
+  const supabase = createClient<Database>();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -59,11 +59,10 @@ const Email = ({ email }: { email: string }) => {
       // エラーチェック
       if (signOutError) {
         setMessage("エラーが発生しました。" + signOutError.message);
-
         return;
       }
 
-      router.push("/auth/login");
+      router.push("/auth/signin");
     } catch (error) {
       setMessage("エラーが発生しました。" + error);
       return;
