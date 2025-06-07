@@ -3,7 +3,7 @@
 // use server
 
 import { redirect } from "next/navigation";
-import { createClient } from "../../../../utils/supabase/clients";
+import { createClient } from "../../../../utils/supabase/server";
 import Signin from "@/app/components/signin/page";
 import type { Database } from "@/app/lib/database.types";
 
