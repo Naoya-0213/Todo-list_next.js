@@ -36,7 +36,7 @@ export const Navigation = ({
 
   return (
     <header className="shadow-lg shadow-gray-100">
-      <div className="py-5 container max-w-screen-sm mx-auto flex items-center justify-between">
+      <div className="py-5 w-full max-w-5xl px-4 mx-auto flex items-center justify-between">
         <Link href="/" className="font-bold text-xl cursor-pointer">
           TODOリスト
         </Link>
