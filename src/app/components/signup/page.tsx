@@ -61,16 +61,16 @@ const Signup = () => {
       }
 
       // プロフィールの名前の更新
-      const { error: updateError } = await supabase
-        .from(`profiles`)
-        .update({ name: data.name })
-        .eq("email", data.email);
+      // const { error: updateError } = await supabase
+      //   .from(`profiles`)
+      //   .update({ name: data.name })
+      //   .eq("email", data.email);
 
-      // エラーチェック
-      if (updateError) {
-        setMessage("エラーが発生しました。" + updateError.message);
-        return;
-      }
+      // // エラーチェック
+      // if (updateError) {
+      //   setMessage("エラーが発生しました。" + updateError.message);
+      //   return;
+      // }
 
       // 入力フォームクリア
       reset();

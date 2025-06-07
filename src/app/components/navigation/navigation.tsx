@@ -43,7 +43,7 @@ export const Navigation = ({
 
         <div className="text-sm font-bold">
           {session ? (
-            <div className="flex items-center space-x-5"></div>
+            <div className="flex items-center space-x-5">ログイン済み</div>
           ) : (
             <div className="flex items-center space-x-5">
               <Link href="/auth/signin">ログイン</Link>
