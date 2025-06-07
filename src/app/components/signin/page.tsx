@@ -7,12 +7,12 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import LoadingSpinner from "../loading/loading";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { Database } from "@/app/lib/database.types";
 import { createClient } from "../../../../utils/supabase/clients";
+import LoadingSpinner from "../loading/loading";
 
 // dataの型定義
 type FormData = {
@@ -20,7 +20,7 @@ type FormData = {
   password: string;
 };
 
-// zodの指定　入力データの検証およびバリデーション
+// zodの指定 入力データの検証およびバリデーション
 const schema = z.object({
   email: z.string().email({ message: "メールアドレスの形式ではありません" }),
   password: z.string().min(6, { message: "6文字以上入力する必要があります" }),
