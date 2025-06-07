@@ -50,7 +50,7 @@ export const Navigation = ({
                     src={
                       profile && profile.avatar_url
                         ? profile.avatar_url
-                        : "/default.png"
+                        : "/default.jpeg"
                     }
                     className="rounded-full object-cover"
                     alt="avatar"
