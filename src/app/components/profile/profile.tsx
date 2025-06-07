@@ -195,7 +195,7 @@ const Profile = () => {
         </div>
 
         {/* 名前 */}
-        <div className="mb-5 w-1/3">
+        <div className="mb-5 w-2/3">
           <div className="text-sm mb-1 font-bold">名前</div>
           <input
             type="text"
@@ -211,7 +211,7 @@ const Profile = () => {
         </div>
 
         {/* 自己紹介 */}
-        <div className="mb-5  w-1/3">
+        <div className="mb-5  w-2/3">
           <div className="text-sm mb-1 font-bold">自己紹介</div>
           <textarea
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500"
@@ -223,7 +223,7 @@ const Profile = () => {
         </div>
 
         {/* 変更ボタン */}
-        <div className="mb-5  w-1/3">
+        <div className="mb-5  w-2/3">
           {loading ? (
             <LoadingSpinner />
           ) : (
