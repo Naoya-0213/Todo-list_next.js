@@ -87,7 +87,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-[400px] mx-auto">
+    <div className="max-w-[400px] mx-auto pt-[10px]">
       <div className="text-center font-bold text-xl mb-10">サインアップ</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* 名前 */}
@@ -133,7 +133,7 @@ const Signup = () => {
         </div>
 
         {/* サインアップボタン */}
-        <div className="mb-5">
+        <div className="mb-5 ">
           {loading ? (
             <LoadingSpinner />
           ) : (
@@ -153,7 +153,7 @@ const Signup = () => {
       )}
 
       <div className="text-center text-sm">
-        <Link href="/auth/login" className="text-gray-500 font-bold">
+        <Link href="/auth/signin" className="text-gray-500 font-bold">
           ログインはこちら
         </Link>
       </div>

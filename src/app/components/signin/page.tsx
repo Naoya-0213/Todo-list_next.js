@@ -76,7 +76,7 @@ export default function Signin() {
   };
 
   return (
-    <div className="max-w-[400px] mx-auto">
+    <div className="max-w-[400px] mx-auto pt-[10px]">
       <div className="text-center font-bold text-xl mb-10">ログイン</div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,18 +129,18 @@ export default function Signin() {
       )}
 
       {/* パスワード忘れた時の挙動 */}
-      {/* <div className="text-center text-sm mb-5">
+      <div className="text-center text-sm mb-5">
         <Link href="/auth/reset-password" className="text-gray-500 font-bold">
           パスワードを忘れた方はこちら
         </Link>
-      </div> */}
+      </div>
 
       {/* サインアップ用のリンク */}
-      {/* <div className="text-center text-sm mb-5">
+      <div className="text-center text-sm mb-5">
         <Link href="/auth/signup" className="text-gray-500 font-bold">
           アカウントを作成する
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 }
