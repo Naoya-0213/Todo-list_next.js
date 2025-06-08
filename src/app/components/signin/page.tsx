@@ -28,7 +28,7 @@ export default function Signin() {
   const router = useRouter();
 
   // supabase連携（別ページにて連携済み）
-  const supabase = createClient<Database>();
+  const supabase = createClient();
 
   // 処理中のローディング
   const [loading, setLoading] = useState(false);

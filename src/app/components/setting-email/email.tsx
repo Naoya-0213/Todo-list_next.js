@@ -18,7 +18,7 @@ const schema = z.object({
 // メールアドレス変更
 const Email = ({ email }: { email: string }) => {
   const router = useRouter();
-  const supabase = createClient<Database>();
+  const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 

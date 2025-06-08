@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { addTodo, getAllTodos } from "../../../utils/supabase/supabaseFunction";
 import type { Database } from "../lib/database.types";
-import TodoList from "./[id]/edit/page";
+import TodoList from "../components/todo-list/TodoList";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
@@ -47,11 +47,14 @@ export default function TodoApp() {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <button className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white text-sm">
+          <button
+            className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white text-sm"
+            type="submit"
+          >
             追加
           </button>
-          <TodoList todos={todos} setTodos={setTodos} />
         </form>
+        <TodoList todos={todos} setTodos={setTodos} />
       </section>
     </div>
   );

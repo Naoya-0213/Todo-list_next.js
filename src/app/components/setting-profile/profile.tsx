@@ -23,7 +23,7 @@ const schema = z.object({
 // プロフィール
 const Profile = () => {
   const router = useRouter();
-  const supabase = createClient<Database>();
+  const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [message, setMessage] = useState("");

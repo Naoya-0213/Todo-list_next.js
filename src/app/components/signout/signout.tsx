@@ -9,7 +9,7 @@ import LoadingSpinner from "../loading/loading";
 // ログアウト
 const Signout = () => {
   const router = useRouter();
-  const supabase = createClient<Database>();
+  const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 

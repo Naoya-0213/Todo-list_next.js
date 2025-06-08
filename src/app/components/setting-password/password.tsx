@@ -29,7 +29,7 @@ const schema = z
 // パスワード変更
 const Password = () => {
   const router = useRouter();
-  const supabase = createClient<Database>();
+  const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
