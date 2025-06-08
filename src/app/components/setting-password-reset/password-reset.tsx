@@ -41,7 +41,7 @@ const ResetPassword = () => {
     try {
       // パスワードリセットメールを送信
       const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-        redirectTo: `${location.origin}/auth/reset-password/confirm`,
+        redirectTo: `${location.origin}/auth/password-reset/confirm#type=recovery`,
       });
 
       // エラーチェック
