@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
 import BeforeLogin from "./components/beforeLogin/beforeLogin";
-import TodoApp from "./components/todos/TodoApp";
+import TodoApp from "./todos/page";
 import type { Database } from "./lib/database.types";
 
 // メインページ
@@ -12,9 +13,9 @@ export default async function Home() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  return (
-    <div className="text-center text-x1">
-      {session ? <TodoApp /> : <BeforeLogin />}
-    </div>
-  );
+  if (session) {
+    redirect("/todos");
+  }
+
+  return <BeforeLogin />;
 }
