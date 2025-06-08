@@ -130,7 +130,7 @@ export default function Signin() {
 
       {/* パスワード忘れた時の挙動 */}
       <div className="text-center text-sm mb-5">
-        <Link href="/auth/reset-password" className="text-gray-500 font-bold">
+        <Link href="/auth/password-reset" className="text-gray-500 font-bold">
           パスワードを忘れた方はこちら
         </Link>
       </div>
