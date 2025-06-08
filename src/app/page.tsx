@@ -1,4 +1,6 @@
 import { createClient } from "../../utils/supabase/server";
+import BeforeLogin from "./components/beforeLogin/beforeLogin";
+import TodoApp from "./components/todos/TodoApp";
 import type { Database } from "./lib/database.types";
 
 // メインページ
@@ -12,7 +14,7 @@ export default async function Home() {
 
   return (
     <div className="text-center text-x1">
-      {session ? <div>ログイン済</div> : <div>未ログイン</div>}
+      {session ? <TodoApp /> : <BeforeLogin />}
     </div>
   );
 }
