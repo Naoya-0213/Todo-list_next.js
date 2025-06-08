@@ -1,32 +1,37 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { addTodo, getAllTodos } from "../../../utils/supabase/supabaseFunction";
+import type { Database } from "../lib/database.types";
+import TodoList from "./[id]/edit/page";
 
-export default async function TodoApp() {
-  // const [todos, setTodos] = useState<any>([]);
-  // const [title, setTitle] = useState<string>("");
+type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
-  // useEffect(() => {
-  //   const getTodos = async () => {
-  //     const todos = await getAllTodos();
-  //     setTodos(todos);
-  //   };
+export default function TodoApp() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [title, setTitle] = useState<string>("");
 
-  //   getTodos();
-  // }, []);
+  useEffect(() => {
+    const getTodos = async () => {
+      const todos = await getAllTodos();
+      if (todos) setTodos(todos);
+    };
 
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
+    getTodos();
+  }, []);
 
-  //   if (title === "") return;
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-  //   // Todoの追加
-  //   await addTodo(title);
-  //   setTitle("");
+    if (title === "") return;
 
-  //   const todos = await getAllTodos();
-  //   setTodos(todos);
-  // };
+    // Todoの追加
+    await addTodo(title);
+    setTitle("");
+
+    const todos = await getAllTodos();
+    if (todos) setTodos(todos);
+  };
 
   return (
     <div className="flex justify-center pt-[10px]">
@@ -34,15 +39,18 @@ export default async function TodoApp() {
         <h1 className="text-center font-bold text-xl mb-10 ">
           Supabase Todo App
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="TODOを入力"
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-5"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <button className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white text-sm">
             追加
           </button>
+          <TodoList todos={todos} setTodos={setTodos} />
         </form>
       </section>
     </div>
