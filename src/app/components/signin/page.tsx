@@ -128,12 +128,12 @@ export default function Signin() {
         <div className="y-5 text-center text-sm text-red-500">{message}</div>
       )}
 
-      {/* パスワード忘れた時の挙動 */}
+      {/* パスワード忘れた時の挙動
       <div className="text-center text-sm mb-5">
         <Link href="/auth/password-reset" className="text-gray-500 font-bold">
           パスワードを忘れた方はこちら
         </Link>
-      </div>
+      </div> */}
 
       {/* サインアップ用のリンク */}
       <div className="text-center text-sm mb-5">
