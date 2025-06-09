@@ -1,5 +1,3 @@
-// src/app/todos/[id]/edit/page.tsx
-
 import EditTodoForm from "@/app/components/todo-edit/EditTodoForm";
 
 type Props = {

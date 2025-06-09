@@ -5,8 +5,5 @@
 ・Next.js
 ・Supabase
 
-profile も実装しようとしたが、時間かかるので
-一旦なしにて進めます。
-
 参考：https://www.youtube.com/watch?v=CZlZgRo0bZ4
 （Todo リスト作成）
