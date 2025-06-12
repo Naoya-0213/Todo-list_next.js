@@ -14,6 +14,7 @@ export default function TodoApp() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState<string>("");
 
+  // titleの取得＆supabaseへ保存
   useEffect(() => {
     const getTodos = async () => {
       const todos = await getAllTodos();
