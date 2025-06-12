@@ -1,4 +1,4 @@
-import EditTodoForm from "@/app/components/todo-edit/EditTodoForm";
+import EditTodoForm from "@/app/components/todo-app/EditTodoForm";
 
 type Props = {
   params: {
