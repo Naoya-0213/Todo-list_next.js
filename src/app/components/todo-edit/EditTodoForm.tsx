@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import {
   getTodoById,
   updateTodo,
-} from "../../../../utils/supabase/supabaseFunction";
+} from "../../../../utils/supabase/supabaseTodoFunction";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 

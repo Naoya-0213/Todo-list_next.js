@@ -4,6 +4,7 @@ import { createClient } from "./clients";
 // 🔐 共通：ログイン中のユーザーを取得
 const getCurrentUser = async (supabase: ReturnType<typeof createClient>) => {
   const result = await supabase.auth.getUser();
+  
   if (result.error || !result.data.user) {
     console.error("ユーザー情報の取得に失敗");
     return null;

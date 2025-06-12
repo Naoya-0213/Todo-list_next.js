@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { addTodo, getAllTodos } from "../../../utils/supabase/supabaseFunction";
+import {
+  addTodo,
+  getAllTodos,
+} from "../../../utils/supabase/supabaseTodoFunction";
 import type { Database } from "../lib/database.types";
 import TodoList from "../components/todo-list/TodoList";
 
@@ -20,7 +23,7 @@ export default function TodoApp() {
     getTodos();
   }, []);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (title === "") return;
@@ -36,7 +39,7 @@ export default function TodoApp() {
   return (
     <div className="flex justify-center pt-[10px]">
       <section>
-        <h1 className="text-center font-bold text-xl mb-10 ">
+        <h1 className="text-center font-bold text-xl mb-10">
           Supabase Todo App
         </h1>
         <form onSubmit={handleSubmit}>

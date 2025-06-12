@@ -5,7 +5,7 @@ import type { Database } from "@/app/lib/database.types";
 import {
   deleteTodo,
   getAllTodos,
-} from "../../../../utils/supabase/supabaseFunction";
+} from "../../../../utils/supabase/supabaseTodoFunction";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
@@ -30,15 +30,39 @@ const TodoList = ({ todos, setTodos }: Props) => {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className="flex justify-between items-center bg-orange-200 p-2 rounded-md mb-2"
+              className="flex flex-col gap-5 items-start border border-black p-4 rounded-md mb-4"
             >
-              <span>{todo.title}</span>
-              <button
-                onClick={() => handleDelete(todo.id)}
-                className="text-red-600 hover:underline"
-              >
-                削除
+              {/* タイトル */}
+              <div className="flex flex-col">
+                <p>{todo.status}</p>
+                <h3 className="font-bold text-xl">{todo.title}</h3>
+              </div>
+
+              {/* 詳細ボタン */}
+              <button className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm">
+                詳細
               </button>
+              <p>{todo.description}</p>
+
+              <p>期限：{todo.due_date}</p>
+
+              <div className="flex gap-3">
+                {/* 編集ボタン */}
+                <button
+                  // onClick={() => handleDelete(todo.id)}
+                  className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
+                >
+                  編集
+                </button>
+
+                {/* 削除ボタン */}
+                <button
+                  onClick={() => handleDelete(todo.id)}
+                  className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
+                >
+                  削除
+                </button>
+              </div>
             </li>
           ))}
         </ul>
