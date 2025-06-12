@@ -5,6 +5,7 @@ import type { Database } from "@/app/lib/database.types";
 import {
   deleteTodo,
   getAllTodos,
+  updateTodoStatus,
 } from "../../../../utils/supabase/supabaseTodoFunction";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
@@ -19,8 +20,6 @@ const TodoList = ({ todos, setTodos }: Props) => {
   const [openDescriptionId, setOpenDescriptionId] = useState<string | null>(
     null
   );
-  // ステータス管理
-  const [status, setStatus] = useState("未着手");
 
   const handleDelete = async (id: string) => {
     await deleteTodo(id);
@@ -43,8 +42,15 @@ const TodoList = ({ todos, setTodos }: Props) => {
               <div className="flex gap-3 justify-center items-center">
                 {/* ステータス */}
                 <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
+                  value={todo.status ?? "未着手"}
+                  onChange={async (e) => {
+                    const newStatus = e.target.value;
+                    if (newStatus !== todo.status) {
+                      await updateTodoStatus(todo.id, newStatus); // supabaseへ保存
+                      const updatedTodos = await getAllTodos();
+                      if (updatedTodos) setTodos(updatedTodos);
+                    }
+                  }}
                   className="border rounded-md p-2"
                 >
                   <option value="未着手">未着手</option>

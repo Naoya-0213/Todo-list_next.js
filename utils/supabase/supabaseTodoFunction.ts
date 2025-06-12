@@ -109,3 +109,20 @@ export const updateTodo = async (id: string, title: string) => {
     console.error("更新失敗:", error.message);
   }
 };
+
+// ✅ 自分のTODOのステータスだけ更新
+export const updateTodoStatus = async (id: string, status: string) => {
+  const supabase = await createClient();
+  const user = await getCurrentUser(supabase);
+  if (!user) return;
+
+  const { error } = await supabase
+    .from("todos")
+    .update({ status }) // ← ここでstatusのみ更新
+    .eq("id", id)
+    .eq("user_id", user.id);
+
+  if (error) {
+    console.error("ステータス更新失敗:", error.message);
+  }
+};
