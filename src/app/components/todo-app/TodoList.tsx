@@ -43,15 +43,20 @@ const TodoList = ({ todos, setTodos }: Props) => {
                 {/* ステータス */}
                 <select
                   value={todo.status ?? "未着手"}
-                  onChange={async (e) => {
+                  onChange={(e) => {
                     const newStatus = e.target.value;
-                    if (newStatus !== todo.status) {
-                      await updateTodoStatus(todo.id, newStatus); // supabaseへ保存
-                      const updatedTodos = await getAllTodos();
-                      if (updatedTodos) setTodos(updatedTodos);
-                    }
+
+                    // ローカル状態だけ更新（即時UIに反映）
+                    setTodos((prevTodos) =>
+                      prevTodos.map((t) =>
+                        t.id === todo.id ? { ...t, status: newStatus } : t
+                      )
+                    );
+
+                    // Supabaseにも保存（非同期）
+                    updateTodoStatus(todo.id, newStatus);
                   }}
-                  className="border rounded-md p-2"
+                  className="border rounded-md p-2 w-auto"
                 >
                   <option value="未着手">未着手</option>
                   <option value="着手">着手</option>
