@@ -40,7 +40,7 @@ export default function RootLayout({
         <main>{children}</main>
 
         {/* footer表示 */}
-        <footer className="py-5 fixed bottom-0 w-full bg-white">
+        <footer className="py-5 bottom-0 w-full bg-white">
           <div className="text-center text-sm">
             Copyright © All rights reserved | Naoya's Practice
           </div>

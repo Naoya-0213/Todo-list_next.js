@@ -35,7 +35,8 @@ export const getAllTodos = async () => {
 export const addTodo = async (
   title: string,
   due_date: string,
-  description: string
+  description: string,
+  status: string
 ) => {
   const supabase = await createClient();
   const user = await getCurrentUser(supabase);
@@ -45,6 +46,7 @@ export const addTodo = async (
     title,
     due_date,
     description,
+    status,
     user_id: user.id,
   });
 

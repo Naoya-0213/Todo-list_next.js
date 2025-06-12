@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import type { Database } from "@/app/lib/database.types";
 import {
   deleteTodo,
@@ -15,6 +15,13 @@ type Props = {
 };
 
 const TodoList = ({ todos, setTodos }: Props) => {
+  // 詳細クリック表示
+  const [openDescriptionId, setOpenDescriptionId] = useState<string | null>(
+    null
+  );
+  // ステータス管理
+  const [status, setStatus] = useState("未着手");
+
   const handleDelete = async (id: string) => {
     await deleteTodo(id);
     const updatedTodos = await getAllTodos();
@@ -30,21 +37,44 @@ const TodoList = ({ todos, setTodos }: Props) => {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className="flex flex-col gap-5 items-start border border-black p-4 rounded-md mb-4"
+              className="flex flex-col gap-3 items-start border border-black p-4 rounded-md mb-3"
             >
               {/* タイトル */}
-              <div className="flex flex-col">
-                <p>{todo.status}</p>
+              <div className="flex gap-3 justify-center items-center">
+                {/* ステータス */}
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="border rounded-md p-2"
+                >
+                  <option value="未着手">未着手</option>
+                  <option value="着手">着手</option>
+                  <option value="完了">完了</option>
+                </select>
                 <h3 className="font-bold text-xl">{todo.title}</h3>
               </div>
 
               {/* 詳細ボタン */}
-              <button className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm">
-                詳細
+              <button
+                onClick={() =>
+                  setOpenDescriptionId(
+                    openDescriptionId === todo.id ? null : todo.id
+                  )
+                }
+                className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
+              >
+                {openDescriptionId === todo.id ? "閉じる" : "詳細"}
               </button>
-              <p>{todo.description}</p>
+              <span>
+                {openDescriptionId === todo.id && <p>{todo.description}</p>}
+              </span>
 
-              <p>期限：{todo.due_date}</p>
+              <div className="flex gap-3">
+                <label htmlFor="due_date" className="font-bold">
+                  期限
+                </label>
+                <p id="due_date">{todo.due_date}</p>
+              </div>
 
               <div className="flex gap-3">
                 {/* 編集ボタン */}

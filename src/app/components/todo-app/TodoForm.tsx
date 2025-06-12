@@ -13,6 +13,7 @@ export default function TodoForm() {
   const [title, setTitle] = useState<string>("");
   const [dueDate, setDueDate] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [status, setStatus] = useState<string>("未着手");
 
   // タイトル・期限・詳細のsupabaseへ保存
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function TodoForm() {
     if (title === "") return;
 
     // タイトル・期限・詳細の追加
-    await addTodo(title, dueDate, description);
+    await addTodo(title, dueDate, description, status);
     setTitle("");
     setDueDate("");
     setDescription("");
@@ -42,14 +43,26 @@ export default function TodoForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* タイトル */}
-        <input
-          type="text"
-          placeholder="TODOを入力"
-          className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-5"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        />
+        <div className="flex items-center gap-3 ">
+          {/* ステータス */}
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="border rounded-md w-auto py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+          >
+            <option value="未着手">未着手</option>
+            <option value="着手">着手</option>
+            <option value="完了">完了</option>
+          </select>
+          {/* タイトル */}
+          <input
+            type="text"
+            placeholder="TODOを入力"
+            className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          />
+        </div>
 
         {/* 期限 */}
         <input
@@ -63,7 +76,7 @@ export default function TodoForm() {
         {/* 詳細 */}
         <textarea
           placeholder="詳細を入力"
-          className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-5"
+          className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
