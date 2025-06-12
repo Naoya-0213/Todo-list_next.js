@@ -32,13 +32,19 @@ export const getAllTodos = async () => {
 };
 
 // ✅ 自分のTODOを追加
-export const addTodo = async (title: string) => {
+export const addTodo = async (
+  title: string,
+  due_date: string,
+  description: string
+) => {
   const supabase = await createClient();
   const user = await getCurrentUser(supabase);
   if (!user) return;
 
   const { error } = await supabase.from("todos").insert({
     title,
+    due_date,
+    description,
     user_id: user.id,
   });
 
