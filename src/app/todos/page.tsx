@@ -37,8 +37,8 @@ export default function TodoApp() {
   };
 
   return (
-    <div className="flex justify-center pt-[10px]">
-      <section>
+    <div className="flex justify-center pt-[10px] max-w-5xl mx-auto ">
+      <section className="w-100">
         <h1 className="text-center font-bold text-xl mb-10">
           Supabase Todo App
         </h1>
@@ -50,12 +50,14 @@ export default function TodoApp() {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <button
-            className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white text-sm"
-            type="submit"
-          >
-            追加
-          </button>
+          <div className="flex justify-center">
+            <button
+              className="font-bold bg-sky-500 hover:brightness-95 w-50 rounded-full p-2 text-white text-sm"
+              type="submit"
+            >
+              追加
+            </button>{" "}
+          </div>
         </form>
         <TodoList todos={todos} setTodos={setTodos} />
       </section>
