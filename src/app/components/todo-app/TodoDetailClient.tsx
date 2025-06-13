@@ -1,7 +1,8 @@
+// Todo詳細のsupabaseからのデータ取得を担当
+
 "use client";
 
 import { useEffect, useState } from "react";
-
 import TodoDetail from "./TodoDetail";
 
 import type { Database } from "@/app/lib/database.types";

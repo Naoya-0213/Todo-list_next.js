@@ -1,3 +1,6 @@
+// Todo詳細のUI部分
+// user server
+
 import type { Database } from "@/app/lib/database.types";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];

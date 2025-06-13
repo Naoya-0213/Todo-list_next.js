@@ -1,3 +1,7 @@
+// Todo追加のフォーム部分の実装
+
+"use client";
+
 import React, { useEffect, useState } from "react";
 import {
   addTodo,
@@ -93,7 +97,9 @@ export default function TodoForm() {
             placeholder="TODOを入力"
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
           />
-          {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
+          {errors.title && (
+            <p className="text-red-500 text-sm">{errors.title.message}</p>
+          )}
         </div>
 
         {/* 期限 */}
@@ -103,7 +109,9 @@ export default function TodoForm() {
           className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
           placeholder="期限を入力"
         />
-        {errors.dueDate && <p className="text-red-500 text-sm">{errors.dueDate.message}</p>}
+        {errors.dueDate && (
+          <p className="text-red-500 text-sm">{errors.dueDate.message}</p>
+        )}
 
         {/* 詳細 */}
         <textarea
@@ -111,7 +119,9 @@ export default function TodoForm() {
           placeholder="詳細を入力"
           className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
         />
-        {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
+        {errors.description && (
+          <p className="text-red-500 text-sm">{errors.description.message}</p>
+        )}
 
         <div className="flex justify-center">
           <button
