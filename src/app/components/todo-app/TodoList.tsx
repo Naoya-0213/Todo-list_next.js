@@ -10,6 +10,7 @@ import {
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
+// 型定義
 type Props = {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
@@ -38,7 +39,6 @@ const TodoList = ({ todos, setTodos }: Props) => {
               key={todo.id}
               className="flex flex-col gap-3 items-start border border-black p-4 rounded-md mb-3"
             >
-              {/* タイトル */}
               <div className="flex gap-3 justify-center items-center">
                 {/* ステータス */}
                 <select
@@ -58,10 +58,11 @@ const TodoList = ({ todos, setTodos }: Props) => {
                   }}
                   className="border rounded-md p-2 w-auto"
                 >
-                  <option value="未着手">未着手</option>
-                  <option value="着手">着手</option>
+                  <option value="未着手">未完了</option>
+                  <option value="着手">途中</option>
                   <option value="完了">完了</option>
                 </select>
+                {/* タイトル */}
                 <h3 className="font-bold text-xl">{todo.title}</h3>
               </div>
 
