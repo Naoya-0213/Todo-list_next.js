@@ -83,7 +83,7 @@ export const getTodoById = async (id: string) => {
     .select("*")
     .eq("id", id)
     .eq("user_id", user.id)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("取得失敗:", error.message);

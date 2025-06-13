@@ -7,6 +7,7 @@ import TodoDetail from "./TodoDetail";
 
 import type { Database } from "@/app/lib/database.types";
 import { getTodoById } from "../../../../utils/supabase/supabaseTodoFunction";
+import LoadingSpinner from "../loading/loading";
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
 export default function TodoDetailClient({ id }: { id: string }) {
@@ -16,6 +17,6 @@ export default function TodoDetailClient({ id }: { id: string }) {
     getTodoById(id).then((res) => setTodo(res));
   }, [id]);
 
-  if (!todo) return <p>読み込み中...</p>;
+  if (!todo) return <LoadingSpinner />;
   return <TodoDetail todo={todo} />;
 }

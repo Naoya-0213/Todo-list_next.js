@@ -35,7 +35,8 @@ const TodoList = ({ todos, setTodos }: Props) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="w-2/3">
+      <h1 className="text-center font-bold text-xl mb-5">Todo List</h1>
       {todos.length === 0 ? (
         <p className="text-center text-gray-500">まだTODOがありません。</p>
       ) : (
@@ -45,7 +46,7 @@ const TodoList = ({ todos, setTodos }: Props) => {
               key={todo.id}
               className="flex flex-col gap-3 items-start border border-black p-4 rounded-md mb-3"
             >
-              <div className="flex flex-col gap-3 justify-center">
+              <div className="flex gap-3 items-center">
                 {/* ステータス */}
                 <select
                   value={todo.status ?? "未着手"}
@@ -62,7 +63,7 @@ const TodoList = ({ todos, setTodos }: Props) => {
                     // Supabaseにも保存（非同期）
                     updateTodoStatus(todo.id, newStatus);
                   }}
-                  className="border rounded-md p-2 w-22"
+                  className="border rounded-md p-2 w-22 h-[40px]"
                 >
                   <option value="未着手">未完了</option>
                   <option value="着手">途中</option>

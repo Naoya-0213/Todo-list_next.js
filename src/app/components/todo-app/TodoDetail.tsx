@@ -22,11 +22,15 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
           <span className="text-gray-800">{todo.status ?? "未設定"}</span>
         </div>
         <div className="mb-3">
-          <span className="font-semibold text-gray-600">期限：</span>
+          <span className="font-semibold text-gray-600 min-w-[50px]">
+            期限：
+          </span>
           <span className="text-gray-800">{todo.due_date ?? "未設定"}</span>
         </div>
-        <div className="mb-3">
-          <span className="font-semibold text-gray-600">詳細：</span>
+        <div className="mb-3 flex">
+          <span className="font-semibold text-gray-600 min-w-[50px]">
+            詳細：
+          </span>
           <p className="text-gray-800 whitespace-pre-line">
             {todo.description || "（詳細なし）"}
           </p>

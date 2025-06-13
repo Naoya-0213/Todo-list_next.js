@@ -79,13 +79,16 @@ export default function TodoForm() {
 
   return (
     <div>
-      <div className="flex gap-5">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex gap-30">
+        {/* TODO追加フォーム */}
+        <form className="w-1/3" onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="text-center font-bold text-xl mb-5">Todo Form</h1>
+
           <div className="flex items-center gap-3 ">
             {/* ステータス */}
             <select
               {...register("status")}
-              className="border rounded-md w-auto py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+              className="border rounded-md w-auto py-2 px-3 focus:outline-none focus:border-sky-500 mb-3 h-[40px]"
             >
               <option value="未完了">未完了</option>
               <option value="途中">途中</option>
@@ -96,7 +99,7 @@ export default function TodoForm() {
               {...register("title")}
               type="text"
               placeholder="TODOを入力"
-              className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+              className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3 h-[40px]"
             />
             {errors.title && (
               <p className="text-red-500 text-sm">{errors.title.message}</p>
@@ -107,7 +110,7 @@ export default function TodoForm() {
           <input
             {...register("dueDate")}
             type="date"
-            className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+            className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3 h-[40px]"
             placeholder="期限を入力"
           />
           {errors.dueDate && (
@@ -133,6 +136,8 @@ export default function TodoForm() {
             </button>
           </div>
         </form>
+
+        {/* フィルター機能 */}
         <TodoList todos={todos} setTodos={setTodos} />
       </div>
     </div>
