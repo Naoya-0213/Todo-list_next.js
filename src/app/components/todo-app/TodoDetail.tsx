@@ -1,11 +1,14 @@
 // Todo詳細のUI部分
-// user server
+"use client";
 
 import type { Database } from "@/app/lib/database.types";
+import { useRouter } from "next/navigation";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
 export default function TodoDetail({ todo }: { todo: Todo }) {
+  const router = useRouter();
+
   return (
     <div className="pt-[10px]">
       {/* タイトル */}
@@ -36,7 +39,10 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
           </button>
 
           {/* 削除ボタン */}
-          <button className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm">
+          <button
+            onClick={() => router.push("/todos")}
+            className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
+          >
             戻る
           </button>
         </div>

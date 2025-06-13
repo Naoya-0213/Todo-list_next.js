@@ -79,60 +79,62 @@ export default function TodoForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex items-center gap-3 ">
-          {/* ステータス */}
-          <select
-            {...register("status")}
-            className="border rounded-md w-auto py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
-          >
-            <option value="未完了">未完了</option>
-            <option value="途中">途中</option>
-            <option value="完了">完了</option>
-          </select>
-          {/* タイトル */}
+      <div className="flex gap-5">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex items-center gap-3 ">
+            {/* ステータス */}
+            <select
+              {...register("status")}
+              className="border rounded-md w-auto py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+            >
+              <option value="未完了">未完了</option>
+              <option value="途中">途中</option>
+              <option value="完了">完了</option>
+            </select>
+            {/* タイトル */}
+            <input
+              {...register("title")}
+              type="text"
+              placeholder="TODOを入力"
+              className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm">{errors.title.message}</p>
+            )}
+          </div>
+
+          {/* 期限 */}
           <input
-            {...register("title")}
-            type="text"
-            placeholder="TODOを入力"
+            {...register("dueDate")}
+            type="date"
+            className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
+            placeholder="期限を入力"
+          />
+          {errors.dueDate && (
+            <p className="text-red-500 text-sm">{errors.dueDate.message}</p>
+          )}
+
+          {/* 詳細 */}
+          <textarea
+            {...register("description")}
+            placeholder="詳細を入力"
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
           />
-          {errors.title && (
-            <p className="text-red-500 text-sm">{errors.title.message}</p>
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description.message}</p>
           )}
-        </div>
 
-        {/* 期限 */}
-        <input
-          {...register("dueDate")}
-          type="date"
-          className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
-          placeholder="期限を入力"
-        />
-        {errors.dueDate && (
-          <p className="text-red-500 text-sm">{errors.dueDate.message}</p>
-        )}
-
-        {/* 詳細 */}
-        <textarea
-          {...register("description")}
-          placeholder="詳細を入力"
-          className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500 mb-3"
-        />
-        {errors.description && (
-          <p className="text-red-500 text-sm">{errors.description.message}</p>
-        )}
-
-        <div className="flex justify-center">
-          <button
-            className="font-bold bg-sky-500 hover:brightness-95 w-50 rounded-full p-2 text-white text-sm"
-            type="submit"
-          >
-            追加
-          </button>
-        </div>
-      </form>
-      <TodoList todos={todos} setTodos={setTodos} />
+          <div className="flex justify-center">
+            <button
+              className="font-bold bg-sky-500 hover:brightness-95 w-50 rounded-full p-2 text-white text-sm"
+              type="submit"
+            >
+              追加
+            </button>
+          </div>
+        </form>
+        <TodoList todos={todos} setTodos={setTodos} />
+      </div>
     </div>
   );
 }
