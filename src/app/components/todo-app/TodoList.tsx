@@ -7,6 +7,7 @@ import {
   getAllTodos,
   updateTodoStatus,
 } from "../../../../utils/supabase/supabaseTodoFunction";
+import { useRouter } from "next/navigation";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 const TodoList = ({ todos, setTodos }: Props) => {
+  // ページ遷移設定
+  const router = useRouter();
+
   // 詳細クリック表示
   const [openDescriptionId, setOpenDescriptionId] = useState<string | null>(
     null
@@ -39,7 +43,7 @@ const TodoList = ({ todos, setTodos }: Props) => {
               key={todo.id}
               className="flex flex-col gap-3 items-start border border-black p-4 rounded-md mb-3"
             >
-              <div className="flex gap-3 justify-center items-center">
+              <div className="flex flex-col gap-3 justify-center">
                 {/* ステータス */}
                 <select
                   value={todo.status ?? "未着手"}
@@ -56,7 +60,7 @@ const TodoList = ({ todos, setTodos }: Props) => {
                     // Supabaseにも保存（非同期）
                     updateTodoStatus(todo.id, newStatus);
                   }}
-                  className="border rounded-md p-2 w-auto"
+                  className="border rounded-md p-2 w-22"
                 >
                   <option value="未着手">未完了</option>
                   <option value="着手">途中</option>
@@ -66,21 +70,7 @@ const TodoList = ({ todos, setTodos }: Props) => {
                 <h3 className="font-bold text-xl">{todo.title}</h3>
               </div>
 
-              {/* 詳細ボタン */}
-              <button
-                onClick={() =>
-                  setOpenDescriptionId(
-                    openDescriptionId === todo.id ? null : todo.id
-                  )
-                }
-                className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
-              >
-                {openDescriptionId === todo.id ? "閉じる" : "詳細"}
-              </button>
-              <span>
-                {openDescriptionId === todo.id && <p>{todo.description}</p>}
-              </span>
-
+              {/* 期限 */}
               <div className="flex gap-3">
                 <label htmlFor="due_date" className="font-bold">
                   期限
@@ -89,13 +79,16 @@ const TodoList = ({ todos, setTodos }: Props) => {
               </div>
 
               <div className="flex gap-3">
-                {/* 編集ボタン */}
+                {/* 詳細ボタン */}
                 <button
-                  // onClick={() => handleDelete(todo.id)}
+                  onClick={() => router.push(`/todos/${todo.id}`)}
                   className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
                 >
-                  編集
+                  詳細
                 </button>
+                <span>
+                  {openDescriptionId === todo.id && <p>{todo.description}</p>}
+                </span>
 
                 {/* 削除ボタン */}
                 <button
