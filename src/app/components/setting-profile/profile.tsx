@@ -223,13 +223,13 @@ const Profile = () => {
         </div>
 
         {/* 変更ボタン */}
-        <div className="mb-5  w-2/3">
+        <div className="mb-5 w-2/3 flex justify-center">
           {loading ? (
             <LoadingSpinner />
           ) : (
             <button
               type="submit"
-              className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white text-sm"
+              className="font-bold bg-sky-500 hover:brightness-95 w-50 rounded-full p-2 text-white text-sm"
             >
               変更
             </button>
