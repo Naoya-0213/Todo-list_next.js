@@ -38,7 +38,10 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
 
         <div className="flex gap-3">
           {/* 編集ボタン */}
-          <button className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm">
+          <button
+            onClick={() => router.push(`/todos/${todo.id}/edit`)}
+            className="font-bold bg-sky-500 hover:brightness-95 w-20 rounded-full p-2 text-white text-sm"
+          >
             編集
           </button>
 

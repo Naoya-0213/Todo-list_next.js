@@ -94,20 +94,24 @@ export const getTodoById = async (id: string) => {
 };
 
 // ✅ 自分のTODOを更新（編集画面用）
-export const updateTodo = async (id: string, title: string) => {
+export const updateTodo = async (
+  id: string,
+  title: string,
+  description: string,
+  dueDate: string,
+  status: string
+) => {
   const supabase = await createClient();
-  const user = await getCurrentUser(supabase);
-  if (!user) return;
 
-  const { error } = await supabase
+  await supabase
     .from("todos")
-    .update({ title })
-    .eq("id", id)
-    .eq("user_id", user.id);
-
-  if (error) {
-    console.error("更新失敗:", error.message);
-  }
+    .update({
+      title,
+      description,
+      due_date: dueDate || null,
+      status,
+    })
+    .eq("id", id);
 };
 
 // ✅ 自分のTODOのステータスだけ更新
