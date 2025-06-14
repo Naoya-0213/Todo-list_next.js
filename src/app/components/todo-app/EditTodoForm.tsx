@@ -1,89 +1,149 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Database } from "@/app/lib/database.types";
 import { useRouter } from "next/navigation";
+import type { Database } from "@/app/lib/database.types";
 import {
   getTodoById,
   updateTodo,
 } from "../../../../utils/supabase/supabaseTodoFunction";
 import LoadingSpinner from "../loading/loading";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Todo = Database["public"]["Tables"]["todos"]["Row"];
+
+// Zodスキーマ
+const schema = z.object({
+  title: z
+    .string()
+    .min(2, { message: "2文字以上入力する必要があります。" })
+    .max(50, { message: "タイトルは50字以内で入力してください。" }),
+  description: z
+    .string()
+    .max(100, { message: "詳細は100字以内で入力してください。" }),
+  dueDate: z.string().refine(
+    (dateStr) => {
+      if (!dateStr) return true;
+      const today = new Date();
+      const selected = new Date(dateStr);
+      today.setHours(0, 0, 0, 0);
+      selected.setHours(0, 0, 0, 0);
+      return selected >= today;
+    },
+    { message: "期限は今日以降の日付を選択してください" }
+  ),
+  status: z.enum(["未完了", "途中", "完了"]),
+});
+
+type Schema = z.infer<typeof schema>;
 
 export default function EditTodoForm({ id }: { id: string }) {
   const router = useRouter();
   const [todo, setTodo] = useState<Todo | null>(null);
-  const [status, setStatus] = useState<string>("未完了");
-  const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [description, setDescription] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Schema>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      title: "",
+      description: "",
+      dueDate: "",
+      status: "未完了",
+    },
+  });
 
   useEffect(() => {
     const fetchTodo = async () => {
       const todo = await getTodoById(id);
       if (todo) {
         setTodo(todo);
-        setStatus(todo.status ?? "未完了");
-        setTitle(todo.title);
-        setDescription(todo.description ?? "");
-        setDueDate(todo.due_date ? todo.due_date.split("T")[0] : "");
+        reset({
+          title: todo.title,
+          description: todo.description ?? "",
+          dueDate: todo.due_date?.split("T")[0] ?? "",
+          status: ["未完了", "途中", "完了"].includes(todo.status ?? "")
+            ? (todo.status as "未完了" | "途中" | "完了")
+            : "未完了",
+        });
       }
     };
-
     fetchTodo();
-  }, [id]);
+  }, [id, reset]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<Schema> = async (data) => {
     if (!todo) return;
-
-    await updateTodo(todo.id, title, description, dueDate, status);
+    await updateTodo(
+      todo.id,
+      data.title,
+      data.description,
+      data.dueDate,
+      data.status
+    );
     router.push(`/todos/${todo.id}`);
   };
 
-  if (!todo) {
-    return <LoadingSpinner />;
-  }
+  if (!todo) return <LoadingSpinner />;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6 px-4 py-6">
+    <form
+      className="flex flex-col gap-3 px-4 py-6"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h1 className="text-center font-bold text-xl mb-6">Todo Edit</h1>
 
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="border rounded-lg px-4 py-3 text-gray-500 flex-1"
+          {...register("status")}
+          className="border rounded-lg px-4 py-3 flex-1"
         >
           <option value="未完了">未完了</option>
-          <option value="着手">着手</option>
+          <option value="途中">途中</option>
           <option value="完了">完了</option>
         </select>
 
-        <input
-          type="text"
-          placeholder="TODOを入力"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border rounded-lg px-4 py-3 text-gray-500 flex-3"
-        />
+        <div className="flex-3 w-full">
+          <input
+            type="text"
+            placeholder="TODOを入力"
+            {...register("title")}
+            className="border rounded-lg px-4 py-3 w-full"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+          )}
+        </div>
       </div>
 
-      <input
-        type="date"
-        placeholder="年/月/日"
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
-        className="border rounded-lg px-4 py-3 text-gray-500"
-      />
+      <div>
+        <input
+          type="date"
+          placeholder="年/月/日"
+          {...register("dueDate")}
+          className="border rounded-lg px-4 py-3 w-full"
+        />
+        {errors.dueDate && (
+          <p className="text-red-500 text-sm mt-1">{errors.dueDate.message}</p>
+        )}
+      </div>
 
-      <textarea
-        placeholder="詳細を入力"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="border rounded-lg px-4 py-3 text-gray-500 h-24 resize-none"
-      />
+      <div>
+        <textarea
+          placeholder="詳細を入力"
+          {...register("description")}
+          className="border rounded-lg px-4 py-3 w-full h-24 resize-none"
+        />
+        {errors.description && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.description.message}
+          </p>
+        )}
+      </div>
 
       <div className="flex justify-center">
         <button

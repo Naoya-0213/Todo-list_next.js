@@ -60,29 +60,30 @@ const Profile = () => {
       const files = e.target.files;
       setFileMessage("");
 
-      // ファイルが選択されていない場合
-      if (!files || files?.length == 0) {
+      if (!files || files.length === 0) {
         setFileMessage("画像をアップロードしてください。");
         return;
       }
 
-      const fileSize = files[0]?.size / 1024 / 1024; // size in MB
-      const fileType = files[0]?.type; // MIME type of the file
+      const file = files[0];
+      const fileSize = file.size / 1024 / 1024;
+      const fileType = file.type;
 
-      // 画像サイズが2MBを超える場合
       if (fileSize > 2) {
         setFileMessage("画像サイズを2MB以下にする必要があります。");
         return;
       }
 
-      // ファイル形式がjpgまたはpngでない場合
       if (fileType !== "image/jpeg" && fileType !== "image/png") {
         setFileMessage("画像はjpgまたはpng形式である必要があります。");
         return;
       }
 
-      // 画像をセット
-      setAvatar(files[0]);
+      setAvatar(file);
+
+      // ✅ プレビュー表示用のURLを生成
+      const previewUrl = URL.createObjectURL(file);
+      setAvatarUrl(previewUrl);
     },
     []
   );

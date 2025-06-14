@@ -65,8 +65,8 @@ const TodoList = ({ todos, setTodos }: Props) => {
                   }}
                   className="border rounded-md p-2 w-22 h-[40px]"
                 >
-                  <option value="未着手">未完了</option>
-                  <option value="着手">途中</option>
+                  <option value="未完了">未完了</option>
+                  <option value="途中">途中</option>
                   <option value="完了">完了</option>
                 </select>
                 {/* タイトル */}
