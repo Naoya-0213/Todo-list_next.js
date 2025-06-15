@@ -40,5 +40,5 @@ export const SupabaseLisner = async () => {
     }
   }
 
-  return <Navigation session={session} profile={profile} />;
+  return { session, profile };
 };

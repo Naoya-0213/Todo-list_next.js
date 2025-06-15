@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SupabaseLisner } from "./components/supabase-lisner";
+import ClientUserSetter from "./components/ClientUserSetter";
 
 // google font(1)
 const geistSans = Geist({
@@ -25,16 +26,17 @@ export const metadata: Metadata = {
 };
 
 // ページ全体レイアウト
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { session, profile } = await SupabaseLisner();
+
   return (
     <html lang="jp">
       <body className={inter.className}>
-        {/* Navigationの表示（componets/Navigation.tsx は "use client"のため、直接呼べない！*/}
-        <SupabaseLisner />
+        <ClientUserSetter session={session} profile={profile} />
 
         {/* mainの内容表示（全体paga.tsxのreturn内容表示 */}
         <main>{children}</main>
