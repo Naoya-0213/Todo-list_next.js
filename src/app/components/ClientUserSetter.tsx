@@ -1,5 +1,4 @@
 // 全体で使い回しするクライアント側処理
-// zustand導入(setUser)
 
 "use client";
 
@@ -10,6 +9,7 @@ import useStore from "../../../store";
 
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
+// zustand導入(setUser)
 export default function ClientUserSetter({
   session,
   profile,

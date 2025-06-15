@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SupabaseLisner } from "./components/supabase-lisner";
 import ClientUserSetter from "./components/ClientUserSetter";
+import { Navigation } from "./components/navigation/navigation";
 
 // google font(1)
 const geistSans = Geist({
@@ -37,6 +38,9 @@ export default async function RootLayout({
     <html lang="jp">
       <body className={inter.className}>
         <ClientUserSetter session={session} profile={profile} />
+
+        {/* ナビゲーション導入 */}
+        <Navigation />
 
         {/* mainの内容表示（全体paga.tsxのreturn内容表示 */}
         <main>{children}</main>
