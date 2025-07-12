@@ -1,8 +1,8 @@
 // Zustand Reactの状態管理ライブラリ
 // https://github.com/pmndrs/zustand
+
 import type { Database } from "@/app/lib/database.types";
 import { create } from "zustand";
-
 
 type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
