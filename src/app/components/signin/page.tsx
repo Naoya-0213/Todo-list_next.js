@@ -7,10 +7,8 @@ import { z } from "zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import type { Database } from "@/app/lib/database.types";
 import { createClient } from "../../../../utils/supabase/clients";
 import LoadingSpinner from "../loading/loading";
 

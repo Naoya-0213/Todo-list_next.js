@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Database } from "@/app/lib/database.types";
 import { createClient } from "../../../../utils/supabase/clients";
 import LoadingSpinner from "../loading/loading";
 
