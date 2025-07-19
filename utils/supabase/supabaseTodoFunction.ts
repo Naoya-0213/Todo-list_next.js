@@ -1,4 +1,3 @@
-import type { Database } from "@/app/lib/database.types";
 import { createClient } from "./clients";
 
 // 🔐 共通：ログイン中のユーザーを取得
